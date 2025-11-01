@@ -29,18 +29,22 @@ const Index = () => {
     description: 'Ready to start simulation',
   };
 
-  // Wire connections (simplified positions)
+  // Wire connections matching the diagram structure
   const wires = [
-    // Dividend to ALU
-    { id: 'w1', x1: 250, y1: 150, x2: 500, y2: 250, active: currentState.aluActive, color: 'cyan' as const },
-    // Divisor to ALU
-    { id: 'w2', x1: 250, y1: 250, x2: 500, y2: 250, active: currentState.aluActive, color: 'cyan' as const },
-    // ALU to Remainder
-    { id: 'w3', x1: 650, y1: 250, x2: 900, y2: 350, active: currentState.aluActive, color: 'green' as const },
-    // Control to ALU
-    { id: 'w4', x1: 600, y1: 80, x2: 575, y2: 200, active: isRunning, color: 'orange' as const },
-    // Control to Quotient
-    { id: 'w5', x1: 700, y1: 80, x2: 950, y2: 220, active: currentState.controlState === 'UPDATE_Q', color: 'orange' as const },
+    // Control Unit to Divisor (down)
+    { id: 'w1', x1: 600, y1: 120, x2: 600, y2: 200, active: isRunning, color: 'orange' as const },
+    // Divisor to Control (feedback up)
+    { id: 'w2', x1: 650, y1: 200, x2: 650, y2: 120, active: currentState.aluActive, color: 'cyan' as const },
+    // Divisor to ALU (down)
+    { id: 'w3', x1: 600, y1: 280, x2: 600, y2: 340, active: currentState.aluActive, color: 'cyan' as const },
+    // Dividend to ALU (right)
+    { id: 'w4', x1: 320, y1: 360, x2: 520, y2: 360, active: currentState.aluActive, color: 'cyan' as const },
+    // ALU to Remainder (right)
+    { id: 'w5', x1: 680, y1: 360, x2: 850, y2: 360, active: currentState.aluActive, color: 'green' as const },
+    // Dividend to Quotient (down)
+    { id: 'w6', x1: 250, y1: 410, x2: 250, y2: 500, active: currentState.controlState === 'UPDATE_Q', color: 'orange' as const },
+    // ALU to Quotient (down-left)
+    { id: 'w7', x1: 560, y1: 400, x2: 320, y2: 520, active: currentState.controlState === 'UPDATE_Q', color: 'green' as const },
   ];
 
   useEffect(() => {
@@ -150,19 +154,21 @@ const Index = () => {
 
       {/* Hardware Visualization */}
       <div className="max-w-7xl mx-auto mb-8">
-        <div className="relative bg-[hsl(var(--card))] rounded-lg p-8 min-h-[500px]">
-          <DataWires wires={wires} width={1200} height={500} />
+        <div className="relative bg-[hsl(var(--card))] rounded-lg p-8 min-h-[600px]">
+          <DataWires wires={wires} width={1200} height={600} />
           
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Column 1: Input Registers */}
-            <div className="space-y-6">
-              <HardwareRegister
-                label="DIVIDEND REGISTER"
-                value={currentState.dividend}
-                active={currentState.aluActive}
-                color="cyan"
-                bits={bits}
+          <div className="relative z-10">
+            {/* Row 1: Control Unit (centered top) */}
+            <div className="flex justify-center mb-12">
+              <ControlUnit
+                active={isRunning}
+                state={currentState.controlState}
+                clockPulse={clockPulse}
               />
+            </div>
+
+            {/* Row 2: Divisor Register (centered) */}
+            <div className="flex justify-center mb-12">
               <HardwareRegister
                 label="DIVISOR REGISTER"
                 value={currentState.divisor}
@@ -172,12 +178,14 @@ const Index = () => {
               />
             </div>
 
-            {/* Column 2: Control Unit & ALU */}
-            <div className="space-y-6 flex flex-col items-center">
-              <ControlUnit
-                active={isRunning}
-                state={currentState.controlState}
-                clockPulse={clockPulse}
+            {/* Row 3: Dividend and ALU (side by side) */}
+            <div className="flex justify-center items-center gap-8 mb-12">
+              <HardwareRegister
+                label="DIVIDEND REGISTER"
+                value={currentState.dividend}
+                active={currentState.aluActive}
+                color="cyan"
+                bits={bits}
               />
               <ALUComponent
                 active={currentState.aluActive}
@@ -185,8 +193,8 @@ const Index = () => {
               />
             </div>
 
-            {/* Column 3: Output Registers */}
-            <div className="space-y-6">
+            {/* Row 4: Quotient and Remainder (bottom row) */}
+            <div className="flex justify-center gap-32">
               <HardwareRegister
                 label="QUOTIENT REGISTER"
                 value={currentState.quotient}
