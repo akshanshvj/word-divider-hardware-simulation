@@ -1,6 +1,3 @@
-[Click here](word-divider.netlify.app)
-
-
 # Word Divider Hardware Simulation
 
 This project implements an **8-bit binary division algorithm** in Verilog.  
@@ -63,6 +60,7 @@ npm run preview
 - Node.js 18+ is recommended.
 - The project uses path alias `@` (configured in `tsconfig.json` and `vite.config.ts`).
 - If you previously relied on Lovable tooling, those integrations have been removed from this repo.
+- Link- [Click here](word-divider.netlify.app)
  
 
 ## License
