@@ -1,5 +1,5 @@
-#Link-
-word-divider.netlify.app
+[Click here](word-divider.netlify.app)
+
 
 # Word Divider Hardware Simulation
 
