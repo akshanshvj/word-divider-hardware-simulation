@@ -1,3 +1,6 @@
+#Link-
+word-divider.netlify.app
+
 # Word Divider Hardware Simulation
 
 This project implements an **8-bit binary division algorithm** in Verilog.  
