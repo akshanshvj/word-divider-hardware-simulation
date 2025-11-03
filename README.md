@@ -60,7 +60,7 @@ npm run preview
 - Node.js 18+ is recommended.
 - The project uses path alias `@` (configured in `tsconfig.json` and `vite.config.ts`).
 - If you previously relied on Lovable tooling, those integrations have been removed from this repo.
-- [![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-blue?style=for-the-badge&logo=netlify)](word-divider.netlify.app)
+- [![Live Demo](https://img.shields.io/badge/Live%20Demo-Netlify-blue?style=for-the-badge&logo=netlify)](https://word-divider.netlify.app)
 
 
 ## License
