@@ -26,7 +26,41 @@ Remainder = 2 (00000010)
 - **Modular FSM and Register components**
 - Icarus Verilog
 - EPWave / GTKWave
-- VS Code / EDA Playground
+# Word Divider Hardware Simulation
 
-## 🧑‍💻 Author
-Axxy (Akshansh Vijay)
+Interactive visualization showing binary division at the hardware level (registers, ALU, control signals). This project is built with Vite, React and TypeScript.
+
+## Quick start (Windows PowerShell)
+
+1) Install dependencies
+
+```powershell
+npm install
+```
+
+2) Start development server
+
+```powershell
+npm run dev
+```
+
+3) Build for production
+
+```powershell
+npm run build
+```
+
+4) Preview production build
+
+```powershell
+npm run preview
+```
+
+## Notes
+- Node.js 18+ is recommended.
+- The project uses path alias `@` (configured in `tsconfig.json` and `vite.config.ts`).
+- If you previously relied on Lovable tooling, those integrations have been removed from this repo.
+ 
+
+## License
+This repository contains code for educational/demo purposes. Update the license as appropriate for your project.
